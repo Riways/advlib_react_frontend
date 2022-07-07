@@ -1,0 +1,85 @@
+/* *{
+  background-color:#FFFFEB;
+  border: 1px solid;
+}  */
+
+body {
+  background-color: mintcream;
+}
+
+#verificationCodeWindow {
+  border-top: 1px solid;
+}
+
+#welcomeComponent {
+  background-color: #fffae1;
+  text-align: left;
+  border: 1px solid;
+  border-color: #999eab;
+  border-radius: 3px;
+}
+
+#succesfulSignIn {
+  border: 1px solid;
+  border-color: #999eab;
+  border-radius: 3px;
+}
+
+#loginForm,
+#registerForm {
+  background-color: white;
+  border: 1px solid;
+  border-color: #999eab;
+  border-radius: 3px;
+}
+
+#navBar {
+  /* background-color:#EBE4FF; */
+  background-color: #e8e9eb;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+#bookListRow,
+#wordListRow {
+  background-color: white;
+  margin-top: 1px;
+  border: 1px solid;
+  border-color: #999eab;
+  border-radius: 3px;
+}
+
+#bookListRowCol,
+#wordListRowCol {
+  border-right: 1px solid;
+  border-color: #999eab;
+}
+
+#bookListHeaderRow,
+#wordListHeaderRow {
+  background-color: rgba(170, 153, 199, 0.192);
+  margin-top: 1px;
+  border: 1px solid;
+  border-color: #999eab;
+  border-radius: 3px;
+}
+
+#bookListHeaderRowCol,
+#wordListHeaderRowCol {
+  border-right: 1px solid;
+  border-color: #999eab;
+}
+
+/*
+3ada1:
+#FFFAE1
+#A497AA
+#999EAB	
+*/
+
+/*
+3ada2:
+#EFEBFD
+#FFFFEB
+#FFF8EB	
+*/
