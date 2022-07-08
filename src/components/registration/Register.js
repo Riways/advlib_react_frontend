@@ -227,8 +227,8 @@ const Register = () => {
         getJwt(username, firstPassword, setError);
         setTimeout(() => {
           navigate("/");
-          setTimeout(() => {document.location.reload();}, 200)
-        }, 1000);
+          // setTimeout(() => {document.location.reload();}, 500)
+        }, 5000);
         
       })
       .catch((error) => {
