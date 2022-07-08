@@ -22,7 +22,6 @@ body {
 }
 
 #wordInfoImageCard{
-  height: 200px;
   background-color: #fffae1;
   border: 1px solid;
   border-color: #999eab;
@@ -30,8 +29,8 @@ body {
 }
 
 #wordImage{
-  width: auto;
-  max-height: 190px;
+  height: auto;
+  max-width: 100%;
 }
 
 #commonBookInfoRow{
