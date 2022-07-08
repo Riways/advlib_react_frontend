@@ -18,7 +18,7 @@ const BookListRow = ({ index, book, removeBookById }) => {
       <Col id="bookListRowCol">{book.author.fullName}</Col>
       {isLogged ? (
         <Col xs={2} sm={2} md={2} id="bookListRowCol">
-          <Link to={`/book-info?bookId=${book.id}&bookName=${book.bookName}`}>
+          <Link to={`/book-info?bookId=${book.id}&bookName=${book.bookName}` }  >
             Analyze
           </Link>
         </Col>

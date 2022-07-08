@@ -11,12 +11,33 @@ body {
   border-top: 1px solid;
 }
 
+
+
 #welcomeComponent {
   background-color: #fffae1;
   text-align: left;
   border: 1px solid;
   border-color: #999eab;
   border-radius: 3px;
+}
+
+#wordInfoImageCard{
+  height: 200px;
+  background-color: white;
+  border: 1px solid;
+  border-color: #999eab;
+  border-radius: 3px;
+}
+
+#wordImage{
+  width: auto;
+  max-height: 190px;
+}
+
+#commonBookInfoRow{
+  background-color: #fffae1;
+  border: 1px solid;
+  border-color: #999eab;
 }
 
 #succesfulSignIn {
