@@ -13,8 +13,12 @@ const BookInfo = () => {
   const bookName = searchParams.get("bookName");
 
   const WORDS_URL = process.env.REACT_APP_WORDS_URL + bookId;
+
   const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
   const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
+
+  const DICTIONARY_API_URL = process.env.REACT_APP_DICTIONARY_API_URL;
+  const DICTIONARY_API_KEY = process.env.REACT_APP_DICTIONARY_API_KEY;
 
   const [words, setWords] = useState([]);
   const [book, setBook] = useState();
@@ -24,6 +28,7 @@ const BookInfo = () => {
   const [pagesSummary, setPagesSummary] = useState(null);
   const [imageUrl, setImageUrl] = useState();
   const [rowWithImageNumber, setRowWithImageNumber] = useState();
+  const [wordDefinition, setWordDefinition] = useState();
 
   const wordsOnPage = 40;
 
@@ -38,14 +43,18 @@ const BookInfo = () => {
   const getWords = () => {
     axios(WORDS_URL)
       .then(({ data }) => {
-        const arrToShow = [...data.words.slice(0, wordsOnPage)];
+        console.log(data);
+        const wordsFromData = data.words;
+        const arrToShow = [...wordsFromData.slice(0, wordsOnPage)];
         setWordsToShow(arrToShow);
-        setWords([...data.words]);
+        setWords([...wordsFromData]);
         setBook(data.book);
         if (data.length % wordsOnPage === 0) {
-          setPagesSummary(Number.parseInt(data.words.length / wordsOnPage));
+          setPagesSummary(Number.parseInt(wordsFromData.length / wordsOnPage));
         } else {
-          setPagesSummary(Number.parseInt(data.words.length / wordsOnPage + 1));
+          setPagesSummary(
+            Number.parseInt(wordsFromData.length / wordsOnPage + 1)
+          );
         }
       })
       .catch((error) => {
@@ -64,7 +73,19 @@ const BookInfo = () => {
       .catch((error) => {
         setError(error);
       });
+  };
 
+  const getWordDefinitionFromDictionary = async (word) => {
+    const WORD_FROM_DICTIONARY_URL = `${DICTIONARY_API_URL}${word}?key=${DICTIONARY_API_KEY}`;
+    await axios
+      .get(WORD_FROM_DICTIONARY_URL)
+      .then(({ data }) => {
+        console.log(data.shortdef);
+        setWordDefinition(data.shortdef)
+      })
+      .catch((error) => {
+        setError(error);
+      });
   };
 
   useEffect(() => {
@@ -93,6 +114,8 @@ const BookInfo = () => {
             getPhotoByWord={getPhotoByWord}
             rowWithImageNumber={rowWithImageNumber}
             imageUrl={imageUrl}
+            getWordDefinitionFromDictionary={getWordDefinitionFromDictionary}
+            wordDefinition={wordDefinition}
           />
           <PaginationBar
             className="mt-3"

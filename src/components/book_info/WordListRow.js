@@ -10,6 +10,8 @@ const WordListRow = ({
   getPhotoByWord,
   rowWithImageNumber,
   imageUrl,
+  getWordDefinitionFromDictionary,
+  wordDefinition,
 }) => {
   const pageIndex = wordsOnPage * (currentPage - 1) + index + 1;
   return (
@@ -23,14 +25,17 @@ const WordListRow = ({
         <Col xs={2} sm={2} md={2} id="wordListRowCol">
           <button
             className="btn btn-link btn-sm"
-            onClick={() => getPhotoByWord(word.word, pageIndex)}
+            onClick={() => {
+              getPhotoByWord(word.word, pageIndex);
+              getWordDefinitionFromDictionary(word.word);
+            }}
           >
             show
           </button>
         </Col>
       </Row>
       {imageUrl && pageIndex === rowWithImageNumber ? (
-        <WordInfo imageUrl={imageUrl}/>
+        <WordInfo imageUrl={imageUrl} wordDefinition={wordDefinition}/>
       ) : (
         <></>
       )}

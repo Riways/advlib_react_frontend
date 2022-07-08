@@ -3,12 +3,22 @@ import { Container } from "react-bootstrap";
 import WordListHeader from "./WordListHeader";
 import WordListRow from "./WordListRow";
 
-const WordList = ({ wordsToShow, currentPage, wordsOnPage, getPhotoByWord, rowWithImageNumber, imageUrl }) => {
+const WordList = ({
+  wordsToShow,
+  currentPage,
+  wordsOnPage,
+  getPhotoByWord,
+  rowWithImageNumber,
+  imageUrl,
+  getWordDefinitionFromDictionary,
+  wordDefinition
+}) => {
   return (
     <Container>
       <WordListHeader />
       {wordsToShow.map((word, index) => (
-        <WordListRow 
+        //TODO Separate rows on two types
+        <WordListRow
           wordsOnPage={wordsOnPage}
           currentPage={currentPage}
           key={index}
@@ -17,6 +27,8 @@ const WordList = ({ wordsToShow, currentPage, wordsOnPage, getPhotoByWord, rowWi
           getPhotoByWord={getPhotoByWord}
           rowWithImageNumber={rowWithImageNumber}
           imageUrl={imageUrl}
+          getWordDefinitionFromDictionary={getWordDefinitionFromDictionary}
+          wordDefinition={wordDefinition}
         />
       ))}
     </Container>
