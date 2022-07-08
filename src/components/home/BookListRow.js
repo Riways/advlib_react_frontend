@@ -28,7 +28,7 @@ const BookListRow = ({ index, book, removeBookById }) => {
         </Col>
       )}
       {role === "ROLE_ADMIN" ? (
-        <Col xs={1} sm={1} md={1} id="bookListRowCol">
+        <Col xs={2} sm={2} md={2} id="bookListRowCol">
           <input
                 type="submit"
                 value="Delete"
@@ -37,7 +37,7 @@ const BookListRow = ({ index, book, removeBookById }) => {
                 />
         </Col>
       ) : (
-        <Col xs={1} sm={1} md={1} id="bookListRowCol">
+        <Col xs={2} sm={2} md={2} id="bookListRowCol">
           {book.readability}
         </Col>
       )}

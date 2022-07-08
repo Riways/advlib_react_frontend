@@ -20,11 +20,11 @@ const BookListHeader = () => {
       </Col>
 
       {role === "ROLE_ADMIN" ? (
-        <Col xs={1} sm={1} md={1}>
+        <Col xs={2} sm={2} md={2}>
           Delete
         </Col>
       ) : (
-        <Col xs={1} sm={1} md={1} id="bookListRowCol">
+        <Col xs={2} sm={2} md={2} id="bookListRowCol">
           Grade
         </Col>
       )}
