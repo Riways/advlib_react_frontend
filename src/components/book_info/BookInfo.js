@@ -78,10 +78,13 @@ const BookInfo = () => {
   const getWordDefinitionFromDictionary = async (word) => {
     const WORD_FROM_DICTIONARY_URL = `${DICTIONARY_API_URL}${word}?key=${DICTIONARY_API_KEY}`;
     await axios
-      .get(WORD_FROM_DICTIONARY_URL)
+      .get(WORD_FROM_DICTIONARY_URL,{transformRequest: (data, headers) => {
+        delete headers.common['Authorization'];
+        return data;
+      }})
       .then(({ data }) => {
-        console.log(data.shortdef);
-        setWordDefinition(data.shortdef)
+        console.log(data[0].shortdef);
+        setWordDefinition(data[0].shortdef)
       })
       .catch((error) => {
         setError(error);
