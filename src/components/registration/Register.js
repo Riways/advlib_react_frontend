@@ -228,7 +228,7 @@ const Register = () => {
         setTimeout(() => {
           navigate("/");
           document.location.reload();
-        }, 3000);
+        }, 1000);
       })
       .catch((error) => {
         setError(error.response.data.message);
