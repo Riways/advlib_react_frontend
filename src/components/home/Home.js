@@ -14,6 +14,7 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
 
+
   const removeBookById = (bookId) => {
     axios
       .delete(`${DELETE_BOOK_URL}${bookId}`)
@@ -59,7 +60,7 @@ const Home = () => {
       ) : (
         <BookList books={books} removeBookById={removeBookById} />
       )}
-      <Footer/>
+      <Footer/> 
     </Container>
   );
 };

@@ -6,10 +6,9 @@ import { ReactComponent as GithubLogo } from "../../images/github.svg";
 
 const Footer = () => {
   return (
-    <Container id="footer" className="d-flex fixed-bottom align-items-center">
-      <Row className=" w-100  p-3 ">
-        <Col md={3} sm={3} xs={3}  >
-          <h5 className="m-2">2022 AdvLib</h5>
+    <Container   id="footer" className=" d-flex mt-5 fixed-bottom align-items-center">
+        <Col md={3} sm={3} xs={3}  className="d-flex  justify-content-start align-items-center">
+          <h6 className="my-2" >2022 AdvLib</h6>
         </Col>
 
         <Col
@@ -21,14 +20,13 @@ const Footer = () => {
           <a href="https://www.linkedin.com/in/viktar-baradzin-512672206/">
             <LinkedInLogo width={45} height={45}/>
           </a>
-          <a href="mailto:a0fragile@gmail.com" className="ms-2">
-            <EmailLogo width={40} height={40} />
+          <a href="mailto:a0fragile@gmail.com" className="ms-1">
+            <EmailLogo width={35} height={35} />
           </a>
-          <a href="https://github.com/Riways"  className="ms-4">
-            <GithubLogo width={30} height={30} />
+          <a href="https://github.com/Riways"  className="ms-3">
+            <GithubLogo width={28} height={28} />
           </a>
         </Col>
-      </Row>
     </Container>
   );
 };
