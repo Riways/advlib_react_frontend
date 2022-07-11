@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { getJwt } from "../login/Login";
 import { Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import SmallHeader from "../headers/SmallHeader";
+
 import {
   validateEmail,
   validatePassword,
@@ -16,9 +16,7 @@ const Register = () => {
   const SAVE_USER_URL = process.env.REACT_APP_USER_SAVE_USER;
   const CHECK_USERNAME_URL = process.env.REACT_APP_USER_CHECK_USERNAME;
   const CHECK_EMAIL_URL = process.env.REACT_APP_USER_CHECK_EMAIL;
-  const TIME_FOR_VERIFICATION_IN_SECONDS = 60;
-
-  const navigate = useNavigate();
+  const TIME_FOR_VERIFICATION_IN_SECONDS = 120;
 
   const [username, setUsername] = useState("");
   const [firstPassword, setFirstPassword] = useState("");
@@ -196,10 +194,10 @@ const Register = () => {
         setError(error.response.data.message);
       });
     setTimeout(() => {
-      setError("60 seconds passed");
+      setError(TIME_FOR_VERIFICATION_IN_SECONDS + " seconds passed");
       setIsWaitingForVerificationCode(false);
       setVerificationCodeFromServer(null);
-    }, 60000);
+    }, TIME_FOR_VERIFICATION_IN_SECONDS * 1000);
   };
 
   const isVerificationCodeValid = () => {
@@ -226,10 +224,8 @@ const Register = () => {
         setIsSuccesfulSignin(true);
         getJwt(username, firstPassword, setError);
         setTimeout(() => {
-          navigate("/");
-          setTimeout(() => {document.location.reload();}, 500)
+          document.location.replace("/");
         }, 1500);
-        
       })
       .catch((error) => {
         setError(error.response.data.message);

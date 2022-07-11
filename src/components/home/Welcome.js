@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { Container } from "react-bootstrap";
 
@@ -17,7 +16,7 @@ const Welcome = ({ book, setError, setBooks }) => {
         Also it count the frequency of occurrence for each word found in the
         text.
       </p>
-      <p>  If you don't have any txt file project, <a href="https://www.gutenberg.org/ebooks/search/?sort_order=downloads">Project Gutenberg</a> will help you. </p>
+      <p>  If you don't have any txt file, project <a href="https://www.gutenberg.org/ebooks/search/?sort_order=downloads">Project Gutenberg</a> will help you. </p>
     </Container>
   );
 };

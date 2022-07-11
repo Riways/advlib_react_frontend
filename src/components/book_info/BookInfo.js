@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import Header from "../headers/Header";
 import PaginationBar from "../pagination_bar/PaginationBar";
+import SegmentedPaginationBar from "../pagination_bar/SegmentedPaginationBar";
 import CommonInfo from "./CommonInfo";
 import WordList from "./WordList";
 
@@ -43,7 +44,6 @@ const BookInfo = () => {
   const getWords = () => {
     axios(WORDS_URL)
       .then(({ data }) => {
-        console.log(data);
         const wordsFromData = data.words;
         const arrToShow = [...wordsFromData.slice(0, wordsOnPage)];
         setWordsToShow(arrToShow);
@@ -62,13 +62,13 @@ const BookInfo = () => {
       });
   };
 
-  const getPhotoByWord = async (word, wordIndex) => {
+  const getPhotoByWord = async (word) => {
+    setImageUrl(null)
     const IMAGE_URL = `${UNSPLASH_API_URL}random?query=${word}&client_id=${UNSPLASH_KEY}`;
     await axios
       .get(IMAGE_URL)
       .then(({ data }) => {
         setImageUrl(data.urls.small);
-        setRowWithImageNumber(wordIndex);
       })
       .catch((error) => {
         setError(error);
@@ -76,15 +76,17 @@ const BookInfo = () => {
   };
 
   const getWordDefinitionFromDictionary = async (word) => {
+    setWordDefinition(null)
     const WORD_FROM_DICTIONARY_URL = `${DICTIONARY_API_URL}${word}?key=${DICTIONARY_API_KEY}`;
     await axios
-      .get(WORD_FROM_DICTIONARY_URL,{transformRequest: (data, headers) => {
-        delete headers.common['Authorization'];
-        return data;
-      }})
+      .get(WORD_FROM_DICTIONARY_URL, {
+        transformRequest: (data, headers) => {
+          delete headers.common["Authorization"];
+          return data;
+        },
+      })
       .then(({ data }) => {
-        console.log(data[0].shortdef);
-        setWordDefinition(data[0].shortdef)
+        setWordDefinition(data[0].shortdef);
       })
       .catch((error) => {
         setError(error);
@@ -99,7 +101,11 @@ const BookInfo = () => {
     <Container fluid className="text-center">
       <Header />
       <h1>{bookName}</h1>
-      {book ? <CommonInfo book={book} /> : <></>}
+      {book ? (
+        <CommonInfo book={book} wordsConsistingEightyPercent={words.length} />
+      ) : (
+        <></>
+      )}
       {!wordsToShow.length ? (
         error ? (
           <Container className="alert alert-danger">{error.message}</Container>
@@ -119,13 +125,23 @@ const BookInfo = () => {
             imageUrl={imageUrl}
             getWordDefinitionFromDictionary={getWordDefinitionFromDictionary}
             wordDefinition={wordDefinition}
+            setRowWithImageNumber={setRowWithImageNumber}
           />
-          <PaginationBar
-            className="mt-3"
-            changeShowedWords={changeShowedWords}
-            currentPage={currentPage}
-            pagesSummary={pagesSummary}
-          />
+          {pagesSummary > 7 ? (
+            <SegmentedPaginationBar
+              className="mt-3"
+              changeShowedWords={changeShowedWords}
+              currentPage={currentPage}
+              pagesSummary={pagesSummary}
+            />
+          ) : (
+            <PaginationBar
+              className="mt-3"
+              changeShowedWords={changeShowedWords}
+              currentPage={currentPage}
+              pagesSummary={pagesSummary}
+            />
+          )}
         </div>
       )}
     </Container>

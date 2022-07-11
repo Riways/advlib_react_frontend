@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import SmallHeader from "../headers/SmallHeader";
-import { useNavigate } from "react-router-dom";
 
 const LOGIN_PAGE_URL = process.env.REACT_APP_LOGIN_URL;
 
@@ -11,9 +10,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
+  const [isCheckingTypedCredentials, setIsCheckingTypedCredentials] =
+    useState(false);
+  const [isSuccesfulLoggedIn, setisSuccesfulLoggedIn] = useState(false);
+
 
   const getJwt = () => {
+    setIsCheckingTypedCredentials(true);
     axios(LOGIN_PAGE_URL, {
       headers: {
         Accept: "application/json",
@@ -23,59 +26,76 @@ const Login = () => {
       method: "post",
     })
       .then(({ data }) => {
+        setisSuccesfulLoggedIn(true);
+        setIsCheckingTypedCredentials(false);
         localStorage.setItem("user", JSON.stringify(data));
-        navigate("/", { replace: true });
-        document.location.reload();
+        setTimeout(() => {
+          document.location.replace("/");
+        }, 1500);
       })
       .catch((error) => {
         setError(error.response.data.message);
+        setIsCheckingTypedCredentials(false);
       });
   };
 
   return (
     <Container className=" text-center" style={{ maxWidth: 450 }}>
       <SmallHeader />
-      <div id="loginForm">
-        <div className=" p-3">
-          <h4>Log In</h4>
-          <p>
-            <input
-              type="text"
-              name="username"
-              className="form-control"
-              placeholder="Username"
-              required
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </p>
-          <p>
-            <input
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="Password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </p>
-          <p>
-            <input
-              type="submit"
-              value="Login"
-              className="mx-2 btn btn-primary"
-              onClick={() => {
-                getJwt();
-              }}
-            />
-            <a href="/register">Register</a>
-          </p>
-          {error ? (
-            <Container className="alert alert-danger">{error}</Container>
-          ) : (
-            <div></div>
-          )}
+      {isSuccesfulLoggedIn ? (
+        <div id="succesfulSignIn" className="alert alert-success">
+          <h3>Welcome, {username}!</h3>
         </div>
-      </div>
+      ) : (
+        <div id="loginForm">
+          <div className=" p-3">
+            <h4>Log In</h4>
+            <p>
+              <input
+                type="text"
+                name="username"
+                className="form-control"
+                placeholder="Username"
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </p>
+            <p>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </p>
+            <p>
+              <input
+                type="submit"
+                value="Login"
+                className="mx-2 btn btn-primary"
+                onClick={() => {
+                  getJwt();
+                }}
+              />
+              <a href="/register">Register</a>
+            </p>
+            {error ? (
+              <Container className="alert alert-danger">{error}</Container>
+            ) : (
+              <div></div>
+            )}
+            {isCheckingTypedCredentials ? (
+              <div className="spinner-border" role="status">
+                <span className="sr-only"></span>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
@@ -98,4 +118,4 @@ const getJwt = (username, password, setError) => {
 };
 
 export default Login;
-export {getJwt}
+export { getJwt };

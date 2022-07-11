@@ -13,11 +13,11 @@ const NumButton = ({
   return (
     <div>
       {currentPage === symbol ? (
-        <Button variant="outline-secondary" disable active >
+        <Button  id="numerationButton" variant="outline-secondary" disable active >
           {symbol}
         </Button>
       ) : (
-        <Button variant="outline-secondary" onClick={() => changeShowedWords(symbol)} >{symbol}</Button>
+        <Button id="numerationButton" variant="outline-secondary" onClick={() => changeShowedWords(symbol)} >{symbol}</Button>
       )}
     </div>
   );

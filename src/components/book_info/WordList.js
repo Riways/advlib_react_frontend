@@ -11,7 +11,8 @@ const WordList = ({
   rowWithImageNumber,
   imageUrl,
   getWordDefinitionFromDictionary,
-  wordDefinition
+  wordDefinition,
+  setRowWithImageNumber
 }) => {
   return (
     <Container>
@@ -29,6 +30,7 @@ const WordList = ({
           imageUrl={imageUrl}
           getWordDefinitionFromDictionary={getWordDefinitionFromDictionary}
           wordDefinition={wordDefinition}
+          setRowWithImageNumber={setRowWithImageNumber}
         />
       ))}
     </Container>

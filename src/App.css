@@ -11,6 +11,10 @@ body {
   border-top: 1px solid;
 }
 
+#numerationButton{
+  width: 45px;
+}
+
 
 
 #welcomeComponent {
@@ -29,6 +33,7 @@ body {
 }
 
 #wordImage{
+  padding: 2%;
   height: auto;
   max-width: 100%;
 }
@@ -54,10 +59,14 @@ body {
 }
 
 #navBar {
-  /* background-color:#EBE4FF; */
   background-color: #e8e9eb;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
+}
+
+#footer{
+  border-top: 1px solid;
+  border-color: #999eab;
 }
 
 #bookListRow,

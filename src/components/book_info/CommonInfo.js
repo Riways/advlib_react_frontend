@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 
-const CommonInfo = ({book}) => {
+const CommonInfo = ({book, wordsConsistingEightyPercent}) => {
 
     return(<Container className="my-2">
         <Row id="commonBookInfoRow">
@@ -20,6 +20,10 @@ const CommonInfo = ({book}) => {
         <Row id="commonBookInfoRow">
             <Col id="wordListHeaderRowCol" >Readabilty</Col>
             <Col id="wordListRowCol" >{book.readability}</Col>
+        </Row>
+        <Row id="commonBookInfoRow">
+            <Col id="wordListHeaderRowCol" >Words that compose 80% of the text</Col>
+            <Col id="wordListRowCol" >{wordsConsistingEightyPercent}</Col>
         </Row>
     </Container>);
 }

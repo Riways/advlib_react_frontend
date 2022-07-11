@@ -53,9 +53,6 @@ const Home = () => {
         error ? (
           <Container className="alert alert-danger">{error.message}</Container>
         ) : (
-          // <div className="spinner-border" role="status">
-          //   <span className="sr-only"></span>
-          // </div>
           <Welcome/>
         )
       ) : (
