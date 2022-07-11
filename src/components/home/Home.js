@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import Footer from "../footer/Footer";
 import Header from "../headers/Header";
 import BookList from "./BookList";
 import Welcome from "./Welcome";
@@ -58,6 +59,7 @@ const Home = () => {
       ) : (
         <BookList books={books} removeBookById={removeBookById} />
       )}
+      <Footer/>
     </Container>
   );
 };
