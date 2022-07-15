@@ -201,7 +201,10 @@ const Register = () => {
   };
 
   const isVerificationCodeValid = () => {
-    if (insertedVerificationCode !== verificationCodeFromServer) {
+    if (
+      (insertedVerificationCode !== verificationCodeFromServer) |
+      !insertedVerificationCode.length
+    ) {
       setError("The entered code is wrong");
       return false;
     } else {
@@ -210,7 +213,7 @@ const Register = () => {
   };
 
   const registrateUser = async () => {
-    if (!isVerificationCodeValid | !username | !firstPassword | !email) {
+    if (!isVerificationCodeValid() | !username | !firstPassword | !email) {
       return;
     }
 
@@ -220,16 +223,14 @@ const Register = () => {
     formData.append("email", email);
     await axios
       .post(SAVE_USER_URL, formData)
-      .then(({ data }) => {
-        setIsSuccesfulSignin(true);
-        getJwt(username, firstPassword, setError);
-        setTimeout(() => {
-          document.location.replace("/");
-        }, 1500);
-      })
+      .then(({ data }) => {})
       .catch((error) => {
         setError(error.response.data.message);
+        return;
       });
+    setIsSuccesfulSignin("true");
+    await getJwt(username, firstPassword, setError);
+    document.location.replace("/");
   };
 
   return (

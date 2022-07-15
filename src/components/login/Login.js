@@ -14,7 +14,6 @@ const Login = () => {
     useState(false);
   const [isSuccesfulLoggedIn, setisSuccesfulLoggedIn] = useState(false);
 
-
   const getJwt = () => {
     setIsCheckingTypedCredentials(true);
     axios(LOGIN_PAGE_URL, {
@@ -100,8 +99,8 @@ const Login = () => {
   );
 };
 
-const getJwt = (username, password, setError) => {
-  axios(LOGIN_PAGE_URL, {
+const getJwt = async (username, password, setError) => {
+  await axios(LOGIN_PAGE_URL, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -111,6 +110,7 @@ const getJwt = (username, password, setError) => {
   })
     .then(({ data }) => {
       localStorage.setItem("user", JSON.stringify(data));
+      
     })
     .catch((error) => {
       setError(error.response.data.message);

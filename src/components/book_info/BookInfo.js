@@ -49,7 +49,7 @@ const BookInfo = () => {
         setWordsToShow(arrToShow);
         setWords([...wordsFromData]);
         setBook(data.book);
-        if (data.length % wordsOnPage === 0) {
+        if (wordsFromData.length % wordsOnPage === 0) {
           setPagesSummary(Number.parseInt(wordsFromData.length / wordsOnPage));
         } else {
           setPagesSummary(
