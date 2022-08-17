@@ -16,7 +16,13 @@ body {
   width: 45px;
 }
 
-
+#loginHint {
+  background-color: #fffae1;
+  text-align: center;
+  border: 1px solid;
+  border-color: #999eab;
+  border-radius: 3px;
+}
 
 #welcomeComponent {
   background-color: #fffae1;

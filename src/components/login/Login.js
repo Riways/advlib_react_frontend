@@ -74,6 +74,7 @@ const Login = () => {
                 type="submit"
                 value="Login"
                 className="mx-2 btn btn-primary"
+                disabled={isCheckingTypedCredentials}
                 onClick={() => {
                   getJwt();
                 }}
@@ -92,6 +93,10 @@ const Login = () => {
             ) : (
               <></>
             )}
+            <div id="loginHint">
+              <div>Default login: <h6 class="d-inline-block">root</h6></div>
+              Default password: <h6 class="d-inline-block">groot</h6>
+            </div>
           </div>
         </div>
       )}
@@ -110,7 +115,6 @@ const getJwt = async (username, password, setError) => {
   })
     .then(({ data }) => {
       localStorage.setItem("user", JSON.stringify(data));
-      
     })
     .catch((error) => {
       setError(error.response.data.message);
