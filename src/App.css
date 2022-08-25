@@ -18,13 +18,24 @@ body {
 
 #lazyButton{
   position: relative;
-  left: 19%;
+  left: 3%;
   background-color: rgba(255, 155, 73, 0.401);
   
 }
 #lazyButton:hover  {
   background-color: rgba(255, 155, 73, 0.727);
   
+}
+
+@keyframes mymove {
+  from {rotate: 0deg;top:0px;}
+  to {rotate: 90deg;top:800px;}
+
+}
+
+#lazyButton:focus  {
+ animation: mymove  2s infinite;
+ animation-delay: 300ms;
 }
 
 #loginHint {
@@ -85,6 +96,7 @@ body {
   background-color: mintcream;
   border-top: 1px solid;
   border-color: #999eab;
+  
 }
 
 #bookListRow,
