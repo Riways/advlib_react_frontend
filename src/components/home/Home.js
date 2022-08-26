@@ -6,6 +6,7 @@ import Header from "../headers/Header";
 import BookList from "./BookList";
 import Welcome from "./Welcome";
 import LazyButton from "./LazyButton";
+import { sleep } from "../util/Util";
 
 const Home = () => {
   const BOOKS_URL = process.env.REACT_APP_BOOKS_URL;
@@ -16,6 +17,7 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const [isBackendBootstrapped, setisBackendBootstrapped] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const removeBookById = (bookId) => {
     axios
@@ -33,7 +35,7 @@ const Home = () => {
     setBooks(updatedBooks);
   };
   const getBooks = async () => {
-    axios(BOOKS_URL)
+    await axios(BOOKS_URL)
       .then(({ data }) => {
         if (data.errors) {
           throw new Error(data.errors);
@@ -44,31 +46,38 @@ const Home = () => {
       .catch((error) => {
         setError(error);
       });
+    setIsInitialized(true);
   };
 
+   
+
   useEffect(() => {
-    getBooks();
+     getBooks();
+      
   }, []);
 
   return (
     <Container fluid className="text-center">
       <Header />
       <h3 className="mt-5">Uploaded books</h3>
-      {isBackendBootstrapped ? (
-        <></>
-      ) : (
-        <Container className="alert alert-danger">
-          <p>
-            Heroku turns application to sleep after 1 hour of inactivity. Please
-            wait a minute until backend will bootstrap itself.
-          </p>
-        </Container>
-      )}
-      {!books.length ? (
+
+      {!books.length && isInitialized? (
         error ? (
           <Container className="alert alert-danger">{error.message}</Container>
         ) : (
-          <Welcome />
+          <>
+            {isBackendBootstrapped ? (
+              <></>
+            ) : (
+              <Container className="alert alert-danger">
+                <p>
+                  Heroku turns application to sleep after 1 hour of inactivity.
+                  Please wait a minute until backend will bootstrap itself.
+                </p>
+              </Container>
+            )}
+            <Welcome />
+          </>
         )
       ) : (
         <>

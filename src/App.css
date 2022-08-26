@@ -29,13 +29,13 @@ body {
 
 @keyframes mymove {
   from {rotate: 0deg;top:0px;}
-  to {rotate: 90deg;top:800px;}
+  to {rotate: 90deg;top:900px;}
 
 }
 
 #lazyButton:focus  {
- animation: mymove  2s infinite;
- animation-delay: 300ms;
+ animation: mymove  2s  ;
+ animation-delay: 600ms;
 }
 
 #loginHint {

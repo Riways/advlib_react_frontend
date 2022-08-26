@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Login, { getJwt } from "../login/Login";
+import  { getJwt } from "../login/Login";
 
 
 
